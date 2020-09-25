@@ -1,7 +1,32 @@
-.input-filter{
-    display: block;
+.input-filter {
+  display: block;
 }
 
 .card {
-    width: 18rem;
+  font-size: 1rem;
+}
+
+.form-filter {
+  display: grid;
+  text-align: center;
+}
+
+.search {
+  width: 30rem !important;
+}
+.div-filter {
+  display: block;
+  text-align: center;
+}
+
+.p-filter {
+    display: inline;
+}
+
+.open {
+    background-color: red;
+}
+
+.close {
+    width: 0px;
 }

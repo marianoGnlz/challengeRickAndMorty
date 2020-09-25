@@ -3,11 +3,11 @@ import React, { Fragment } from "react";
 function Navbar() {
   return (
     <Fragment>
-      <nav className="navbar navbar-light bg-light">
-        <a className="navbar-brand">Navbar</a>
+      <nav className="navbar navbar-light bg-light mb-3">
+        <a className="navbar-brand">Home</a>
         <form className="form-inline">
           <input
-            className="form-control mr-sm-2"
+            className="search form-control mr-sm-2"
             type="search"
             placeholder="Search"
             aria-label="Search"
