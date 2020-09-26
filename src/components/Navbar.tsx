@@ -4,7 +4,7 @@ function Navbar() {
   return (
     <Fragment>
       <nav className="navbar navbar-light bg-light mb-3">
-        <a className="navbar-brand">Home</a>
+        <a className="navbar-brand" href="/#">Home</a>
         <form className="form-inline">
           <input
             className="search form-control mr-sm-2"

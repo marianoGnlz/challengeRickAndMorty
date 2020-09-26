@@ -1,16 +1,32 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import "./css/styles.css";
 
-
 import Filter from "./components/Filter";
-import Navbar from './components/Navbar';
-import Pagination from './components/Pagination';
+import Navbar from "./components/Navbar";
+import Pagination from "./components/Pagination";
 
-import CharacterCard from './components/CharacterGraphQL';
+import CharacterCard from "./components/CharacterGraphQL";
+
+import { useQueryCharacter } from "../src/querys/querys";
 
 function App() {
   const [pagination, setPagination] = useState<number>(0);
-  const [loading, setLoading] = useState(true)
+  const [loadingg, setLoading] = useState<boolean>(true);
+  const [actualPage, setActualPage] = useState<number>(1);
+  const [dataa, setData] = useState(undefined);
+
+  const { data, loading } = useQueryCharacter(actualPage);
+
+  useEffect(() => {
+    if (data && !loading) {
+      setLoading(loading);
+      setData(data);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, loading]);
+
+  // useEffect(() => {return} , [actualPage])
+
   return (
     <Fragment>
       <Navbar />
@@ -20,14 +36,18 @@ function App() {
         </div>
         <div className="col-10">
           <div className="container-fluid">
-            <CharacterCard 
+            <CharacterCard
               setPagination={setPagination}
               setLoading={setLoading}
+              dataa={dataa}
+              loadingg={loadingg}
             />
           </div>
-          <Pagination 
+          <Pagination
             pages={pagination}
-            loading={loading}
+            loadingg={loadingg}
+            actualPage={actualPage}
+            setActualPage={setActualPage}
           />
         </div>
       </div>

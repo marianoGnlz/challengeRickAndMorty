@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { useQuery } from "react-apollo";
-import { gql } from "apollo-boost";
 import { v4 } from "uuid";
+
 
 import Card from "./Card";
 
@@ -13,38 +12,28 @@ type Character = {
 type Props = {
   setPagination: Function;
   setLoading: Function;
+  dataa: any;
+  loadingg: boolean
 };
 
-const Charactercard = ({ setPagination, setLoading }: Props) => {
+const Charactercard = ({ setPagination, setLoading, dataa, loadingg }: Props) => {
   const [characters, setCharacters] = useState<Character[]>([
     { name: "", image: "" },
   ]);
-  const query = gql`
-    {
-      characters {
-        info {
-          count
-          pages
-        }
-        results {
-          name
-          image
-        }
-      }
-    }
-  `;
-  const { data, loading, error } = useQuery(query);
+  
+
 
   useEffect(() => {
-    if (!loading) {
-      setLoading(loading);
+    if (!loadingg) {
+      setLoading(loadingg);
     }
-    if (data && !loading && !error) {
-      setPagination(data.characters.info.pages);
-      console.log(data);
-      setCharacters(data.characters.results);
+    if (dataa && !loadingg) {
+      
+      setPagination(dataa.characters.info.pages);
+      setCharacters(dataa.characters.results);
     }
-  }, [data, loading, error]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dataa, loadingg]);
 
   return (
     <Fragment>
