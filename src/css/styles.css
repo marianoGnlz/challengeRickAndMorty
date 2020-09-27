@@ -1,32 +1,75 @@
+/* Colors */
+.custom-color-1 {
+  background-color: #d7c0d0;
+}
+.custom-color-2 {
+  background-color: #f7c7db;
+}
+.custom-color-3 {
+  background-color: #f79ad3;
+}
+.custom-color-4 {
+  background-color: #c86fc9;
+}
+
+.navbar-button {
+  font-size: 1.2rem;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 400;
+}
+
+.navbar-brand {
+  font-size: 2rem;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 600;
+}
+
 .input-filter {
   display: block;
 }
 
 .card {
   font-size: 1rem;
+  cursor: pointer;
+}
+
+.border-card:hover {
+  border: red 2px solid;
 }
 
 .form-filter {
   display: grid;
   text-align: center;
+  font-size: 1.3rem;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
 }
 
 .search {
   width: 30rem !important;
+  font-size: 1.2rem;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 400;
 }
 .div-filter {
   display: block;
   text-align: center;
+  font-size: 2rem;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 600;
 }
 
 .p-filter {
-    display: inline;
+  display: inline;
+}
+.close-btn {
+  font-size: 2rem;
+  line-height: inherit;
 }
 
-.open {
-    background-color: red;
-}
-
-.close {
-    width: 0px;
+.nav-link {
+  font-size: 1.5rem;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 500;
+  padding: .5rem 1rem 0rem;
 }

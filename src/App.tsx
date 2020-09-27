@@ -5,43 +5,89 @@ import Filter from "./components/Filter";
 import Navbar from "./components/Navbar";
 import Pagination from "./components/Pagination";
 
-import CharacterCard from "./components/CharacterGraphQL";
+import Characters from "./components/CharacterGraphQL";
+import Locations from "./components/LocationsGraphQL";
 
-import { useQueryCharacter } from "../src/querys/querys";
+import {
+  useQueryCharacters,
+  useQueryCharacter,
+  useQueryLocations,
+} from "../src/querys/querys";
 
 function App() {
   const [pagination, setPagination] = useState<number>(0);
   const [loadingg, setLoading] = useState<boolean>(true);
   const [actualPage, setActualPage] = useState<number>(1);
+  const [search, setSearch] = useState<string>("");
+  const [actualFilter, setActualFilter] = useState<string>("Characters");
+
+  const [showFilter, setShowFilter] = useState<boolean>(false);
+
   const [dataa, setData] = useState(undefined);
 
-  const { data, loading } = useQueryCharacter(actualPage);
+  const { data: dataPage, loading: loadingPage } = useQueryCharacters(
+    actualPage
+  );
+  const { data: dataChar, loading: loadingChar } = useQueryCharacter(search);
+
+  const { data: dataLocations, loading: loadingLocations } = useQueryLocations(
+    actualPage
+  );
 
   useEffect(() => {
-    if (data && !loading) {
-      setLoading(loading);
-      setData(data);
+    if (actualFilter === "Characters" && !search && dataPage && !loadingPage) {
+      setLoading(loadingPage);
+      setData(dataPage);
+      return;
+    }
+
+    if (actualFilter === "Characters" && search && dataChar && !loadingChar) {
+      setLoading(loadingChar);
+      setData(dataChar);
+      return;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, loading]);
+  }, [dataPage, loadingPage, dataChar, loadingChar, search, actualFilter]);
 
-  // useEffect(() => {return} , [actualPage])
+  useEffect(() => {
+
+    
+    if (actualFilter === "Locations" && !search && dataLocations && !loadingLocations) {
+      setLoading(loadingLocations);
+      setData(dataLocations);
+      return;
+    }
+  }, [dataLocations, loadingLocations, actualFilter, search]);
 
   return (
     <Fragment>
-      <Navbar />
+      <Navbar setSearch={setSearch} setShowFilter={setShowFilter} />
       <div className="row">
-        <div className="col-2">
-          <Filter />
-        </div>
-        <div className="col-10">
-          <div className="container-fluid">
-            <CharacterCard
-              setPagination={setPagination}
-              setLoading={setLoading}
-              dataa={dataa}
-              loadingg={loadingg}
+        {showFilter ? (
+          <div className="col-2 custom-color-4 pt-4">
+            <Filter
+              setShowFilter={setShowFilter}
+              setActualFilter={setActualFilter}
             />
+          </div>
+        ) : null}
+        <div className={showFilter ? "col-10 mt-3" : "col-12 mt-3"}>
+          <div className="container-fluid">
+            {actualFilter === "Characters" ? (
+              <Characters
+                setPagination={setPagination}
+                setLoading={setLoading}
+                dataa={dataa}
+                loadingg={loadingg}
+              />
+            ) : (
+              <Locations
+                setPagination={setPagination}
+                setLoading={setLoading}
+                dataa={dataa}
+                loadingg={loadingg}
+              />
+            )}
           </div>
           <Pagination
             pages={pagination}

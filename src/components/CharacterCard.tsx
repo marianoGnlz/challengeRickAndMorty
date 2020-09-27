@@ -5,11 +5,11 @@ type Props = {
   name: string;
 };
 
-const Card = ({ image, name }: Props) => {
+const CardCharacter = ({ image, name }: Props) => {
   return (
     <Fragment>
       <div className="col mb-3">
-        <div className="card text-center">
+        <div className="card text-center border-card">
           <img src={image} className="card-img-top card" alt="..." />
           <div className="card-body">
             <p className="card-title">{name}</p>
@@ -20,4 +20,4 @@ const Card = ({ image, name }: Props) => {
   );
 };
 
-export default Card;
+export default CardCharacter;

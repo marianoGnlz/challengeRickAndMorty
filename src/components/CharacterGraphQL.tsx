@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { v4 } from "uuid";
 
 
-import Card from "./Card";
+import CardCharacter from "./CharacterCard";
 
 type Character = {
   name: string;
@@ -16,7 +16,7 @@ type Props = {
   loadingg: boolean
 };
 
-const Charactercard = ({ setPagination, setLoading, dataa, loadingg }: Props) => {
+const Characters = ({ setPagination, setLoading, dataa, loadingg }: Props) => {
   const [characters, setCharacters] = useState<Character[]>([
     { name: "", image: "" },
   ]);
@@ -27,7 +27,7 @@ const Charactercard = ({ setPagination, setLoading, dataa, loadingg }: Props) =>
     if (!loadingg) {
       setLoading(loadingg);
     }
-    if (dataa && !loadingg) {
+    if (dataa && dataa.characters && !loadingg) {
       
       setPagination(dataa.characters.info.pages);
       setCharacters(dataa.characters.results);
@@ -39,11 +39,11 @@ const Charactercard = ({ setPagination, setLoading, dataa, loadingg }: Props) =>
     <Fragment>
       <div className="row row-cols-lg-4 row-cols-xs-1 row-cols-sm-3 row-cols-md-3">
         {characters.map((char) => (
-          <Card key={v4()} name={char.name} image={char.image} />
+          <CardCharacter key={v4()} name={char.name} image={char.image} />
         ))}
       </div>
     </Fragment>
   );
 };
 
-export default Charactercard;
+export default Characters;
