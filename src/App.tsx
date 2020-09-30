@@ -43,6 +43,7 @@ function App() {
 
     if (actualFilter === "Characters" && search && dataChar && !loadingChar) {
       setLoading(loadingChar);
+
       setData(dataChar);
       return;
     }
@@ -50,9 +51,22 @@ function App() {
   }, [dataPage, loadingPage, dataChar, loadingChar, search, actualFilter]);
 
   useEffect(() => {
-
-    
-    if (actualFilter === "Locations" && !search && dataLocations && !loadingLocations) {
+    if (
+      actualFilter === "Locations" &&
+      !search &&
+      dataLocations &&
+      !loadingLocations
+    ) {
+      setLoading(loadingLocations);
+      setData(dataLocations);
+      return;
+    }
+    if (
+      actualFilter === "Locations" &&
+      search &&
+      dataLocations &&
+      !loadingLocations
+    ) {
       setLoading(loadingLocations);
       setData(dataLocations);
       return;

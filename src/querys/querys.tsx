@@ -17,6 +17,9 @@ export const useQueryCharacters = (actualPage: number): Query => {
         results {
           name
           image
+          type
+          gender
+          species
         }
       }
     }
@@ -52,7 +55,7 @@ export const useQueryLocations = (actualPage: number): Query => {
   const queryLocations = gql`
     query getLocations {
       locations {
-        info{
+        info {
           pages
         }
         results {

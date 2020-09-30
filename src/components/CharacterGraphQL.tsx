@@ -1,12 +1,14 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { v4 } from "uuid";
+import { getNameOfDeclaration } from "typescript";
+import ModalCustom from '../components/ModalCustom';
 
-
-import CardCharacter from "./CharacterCard";
 
 type Character = {
   name: string;
   image: string;
+  type: string;
+  gender: string;
+  species: string
 };
 
 type Props = {
@@ -18,7 +20,7 @@ type Props = {
 
 const Characters = ({ setPagination, setLoading, dataa, loadingg }: Props) => {
   const [characters, setCharacters] = useState<Character[]>([
-    { name: "", image: "" },
+    { name: "", image: "", type: "", gender: "", species: "" },
   ]);
   
 
@@ -39,7 +41,14 @@ const Characters = ({ setPagination, setLoading, dataa, loadingg }: Props) => {
     <Fragment>
       <div className="row row-cols-lg-4 row-cols-xs-1 row-cols-sm-3 row-cols-md-3">
         {characters.map((char) => (
-          <CardCharacter key={v4()} name={char.name} image={char.image} />
+          <ModalCustom 
+            name={char.name}
+            image={char.image}
+            type={char.type}
+            gender={char.gender}
+            species={char.species}
+          />
+          
         ))}
       </div>
     </Fragment>
