@@ -62,7 +62,7 @@ const ModalEpisode = ({ name, air_date, episode, characters }: Props) => {
                       key={v4()}
                       name={character.name}
                       image={character.image}
-                      handleShow={() => {
+                      handleShow={():any => {
                         return null;
                       }}
                     />

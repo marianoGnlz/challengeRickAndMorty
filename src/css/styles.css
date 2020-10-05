@@ -28,6 +28,11 @@
   display: block;
 }
 
+.img-titulo {
+  max-height: 6rem;
+}
+
+
 .card {
   font-size: 1rem;
   cursor: pointer;

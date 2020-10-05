@@ -35,7 +35,7 @@ const ModalCharacter = ({ name, image, type, gender, species }: Props) => {
             key={v4()}
             name={name}
             image={image}
-            handleShow={() => {
+            handleShow={():any => {
               return null;
             }}
             card={true}

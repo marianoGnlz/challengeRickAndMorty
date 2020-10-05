@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-
+import image from '../static/Titulo.png';
 type Props = {
   setSearch: Function;
   setShowFilter: Function;
@@ -7,11 +7,12 @@ type Props = {
 
 function Navbar({ setSearch, setShowFilter }: Props) {
   const [value, setValue] = useState("");
+
   return (
     <Fragment>
       <nav className="navbar navbar-dark custom-color-4 nav-bar">
         <a className="navbar-brand" href="/#">
-          Rick and Morty
+          <img className="img-titulo" src={image} alt=""/>
         </a>
         <ul className="navbar-nav mr-auto ml-3">
           <li className="nav-item">
@@ -27,7 +28,7 @@ function Navbar({ setSearch, setShowFilter }: Props) {
             </a>
           </li>
         </ul>
-        <form className="form-inline">
+        <form className="form-inline" id="search">
           <input
             className="search form-control mr-sm-2 custom-color-1"
             type="search"

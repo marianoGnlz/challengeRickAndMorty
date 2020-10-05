@@ -61,7 +61,7 @@ const ModalLocation = ({ name, dimension, type, residents }: Props) => {
                       key={v4()}
                       name={resident.name}
                       image={resident.image}
-                      handleShow={() => {
+                      handleShow={():any => {
                         return null;
                       }}
                     />
