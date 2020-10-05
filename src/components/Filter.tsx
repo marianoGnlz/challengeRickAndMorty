@@ -51,9 +51,10 @@ function Filter({ setShowFilter, setActualFilter }: Props) {
             name="filter"
             id="radio3"
             className="form-check-input"
+            onClick={() => setActualFilter("Episodes")}
           />
           <label htmlFor="radio3" className="form-check-label">
-            Option 3
+            Episodes
           </label>
         </div>
       </form>

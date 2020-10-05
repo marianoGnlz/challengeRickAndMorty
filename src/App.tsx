@@ -7,29 +7,39 @@ import Pagination from "./components/Pagination";
 
 import Characters from "./components/CharacterGraphQL";
 import Locations from "./components/LocationsGraphQL";
+import Episodes from "./components/EpisodesGraphQL";
 
-import { useQueryCharacter, useQueryLocation } from "../src/querys/querys";
+import {
+  useQueryCharacter,
+  useQueryLocation,
+  useQueryEpisodes,
+} from "../src/querys/querys";
 
 function App() {
   const [pagination, setPagination] = useState<number>(0);
-  const [loadingg, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [actualPage, setActualPage] = useState<number>(1);
   const [search, setSearch] = useState<string>("");
   const [actualFilter, setActualFilter] = useState<string>("Characters");
 
   const [showFilter, setShowFilter] = useState<boolean>(false);
 
-  const [dataa, setData] = useState(undefined);
+  const [data, setData] = useState(undefined);
 
-  const { data: dataChar, loading: loadingChar } = useQueryCharacter(
+  const { data: dataChar, loading: loadingChar } = useQueryCharacter({
     search,
-    actualPage
-  );
+    actualPage,
+  });
 
-  const { data: dataLocation, loading: loadingLocation } = useQueryLocation(
+  const { data: dataLocation, loading: loadingLocation } = useQueryLocation({
     search,
-    actualPage
-  );
+    actualPage,
+  });
+
+  const { data: dataEpisodes, loading: loadingEpisodes } = useQueryEpisodes({
+    search,
+    actualPage,
+  });
 
   useEffect(() => {
     if (actualFilter === "Characters" && dataChar && !loadingChar) {
@@ -44,6 +54,13 @@ function App() {
       setData(dataLocation);
     }
   }, [actualFilter, dataLocation, loadingLocation]);
+
+  useEffect(() => {
+    if (actualFilter === "Episodes" && dataEpisodes && !loadingEpisodes) {
+      setLoading(loadingEpisodes);
+      setData(dataEpisodes);
+    }
+  }, [actualFilter, dataEpisodes, loadingEpisodes]);
 
   return (
     <Fragment>
@@ -63,21 +80,28 @@ function App() {
               <Characters
                 setPagination={setPagination}
                 setLoading={setLoading}
-                dataa={dataa}
-                loadingg={loadingg}
+                data={data}
+                loading={loading}
               />
-            ) : (
+            ) : actualFilter === "Locations" ? (
               <Locations
                 setPagination={setPagination}
                 setLoading={setLoading}
-                dataa={dataa}
-                loadingg={loadingg}
+                data={data}
+                loading={loading}
+              />
+            ) : (
+              <Episodes
+                setPagination={setPagination}
+                setLoading={setLoading}
+                data={data}
+                loading={loading}
               />
             )}
           </div>
           <Pagination
             pages={pagination}
-            loadingg={loadingg}
+            loading={loading}
             actualPage={actualPage}
             setActualPage={setActualPage}
           />

@@ -7,8 +7,8 @@ type Props = {
   setPagination: Function;
   setLoading: Function;
 
-  dataa: any;
-  loadingg: boolean;
+  data: any;
+  loading: boolean;
 };
 
 type Location = {
@@ -23,7 +23,7 @@ type Character = {
   image: string;
 };
 
-const Locations = ({ setPagination, setLoading, dataa, loadingg }: Props) => {
+const Locations = ({ setPagination, setLoading, data, loading }: Props) => {
   const [locations, setLocations] = useState<Location[]>([
     {
       name: "",
@@ -34,16 +34,16 @@ const Locations = ({ setPagination, setLoading, dataa, loadingg }: Props) => {
   ]);
 
   useEffect(() => {
-    if (!loadingg) {
-      setLoading(loadingg);
+    if (!loading) {
+      setLoading(loading);
     }
 
-    if (dataa && dataa.locations && !loadingg) {
-      setPagination(dataa.locations.info.pages);
-      setLocations(dataa.locations.results);
+    if (data && data.locations && !loading) {
+      setPagination(data.locations.info.pages);
+      setLocations(data.locations.results);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataa, loadingg]);
+  }, [data, loading]);
   return (
     <Fragment>
       <div className="row row-cols-lg-4 row-cols-xs-1 row-cols-sm-3 row-cols-md-3">

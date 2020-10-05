@@ -4,13 +4,13 @@ import usePages from "../hooks/usePages";
 
 type Props = {
   pages: number;
-  loadingg: boolean;
+  loading: boolean;
   actualPage: number;
 
   setActualPage: Function;
 };
 
-const Pagination = ({ pages, loadingg, actualPage, setActualPage }: Props) => {
+const Pagination = ({ pages, loading, actualPage, setActualPage }: Props) => {
   const [actualPages, setActualPages] = useState<JSX.Element[]>([]);
   const [nextPages, setNextPages] = useState<JSX.Element[]>([]);
   const [previousPages, setPreviousPages] = useState<JSX.Element[]>([]);
@@ -31,11 +31,11 @@ const Pagination = ({ pages, loadingg, actualPage, setActualPage }: Props) => {
   };
 
   useEffect(() => {
-    if (!loadingg) {
+    if (!loading) {
       handleNextPage(pagesArray);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pages,loadingg, actualPage]);
+  }, [pages,loading, actualPage]);
 
   return (
     <nav aria-label="Page navigation example">

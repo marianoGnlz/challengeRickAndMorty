@@ -13,25 +13,25 @@ type Character = {
 type Props = {
   setPagination: Function;
   setLoading: Function;
-  dataa: any;
-  loadingg: boolean;
+  data: any;
+  loading: boolean;
 };
 
-const Characters = ({ setPagination, setLoading, dataa, loadingg }: Props) => {
+const Characters = ({ setPagination, setLoading, data, loading }: Props) => {
   const [characters, setCharacters] = useState<Character[]>([
     { name: "", image: "", type: "", gender: "", species: "" },
   ]);
 
   useEffect(() => {
-    if (!loadingg) {
-      setLoading(loadingg);
+    if (!loading) {
+      setLoading(loading);
     }
-    if (dataa && dataa.characters && !loadingg) {
-      setPagination(dataa.characters.info.pages);
-      setCharacters(dataa.characters.results);
+    if (data && data.characters && !loading) {
+      setPagination(data.characters.info.pages);
+      setCharacters(data.characters.results);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataa, loadingg]);
+  }, [data, loading]);
 
   return (
     <Fragment>
