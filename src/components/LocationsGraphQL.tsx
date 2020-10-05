@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { v4 } from "uuid";
 
-import CardLocations from "./CardLocation";
+import ModalLocation from "./ModalLocations";
 
 type Props = {
   setPagination: Function;
@@ -14,6 +14,13 @@ type Props = {
 type Location = {
   name: string;
   dimension: string;
+  type: string;
+  residents: Character[];
+};
+
+type Character = {
+  name: string;
+  image: string;
 };
 
 const Locations = ({ setPagination, setLoading, dataa, loadingg }: Props) => {
@@ -21,6 +28,8 @@ const Locations = ({ setPagination, setLoading, dataa, loadingg }: Props) => {
     {
       name: "",
       dimension: "",
+      type: "",
+      residents: [{ name: "", image: "" }],
     },
   ]);
 
@@ -39,10 +48,12 @@ const Locations = ({ setPagination, setLoading, dataa, loadingg }: Props) => {
     <Fragment>
       <div className="row row-cols-lg-4 row-cols-xs-1 row-cols-sm-3 row-cols-md-3">
         {locations.map((location) => (
-          <CardLocations
+          <ModalLocation
             key={v4()}
             name={location.name}
+            type={location.type}
             dimension={location.dimension}
+            residents={location.residents}
           />
         ))}
       </div>

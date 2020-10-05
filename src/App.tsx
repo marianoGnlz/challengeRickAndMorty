@@ -8,11 +8,7 @@ import Pagination from "./components/Pagination";
 import Characters from "./components/CharacterGraphQL";
 import Locations from "./components/LocationsGraphQL";
 
-import {
-  useQueryCharacters,
-  useQueryCharacter,
-  useQueryLocations,
-} from "../src/querys/querys";
+import { useQueryCharacter, useQueryLocation } from "../src/querys/querys";
 
 function App() {
   const [pagination, setPagination] = useState<number>(0);
@@ -25,53 +21,29 @@ function App() {
 
   const [dataa, setData] = useState(undefined);
 
-  const { data: dataPage, loading: loadingPage } = useQueryCharacters(
+  const { data: dataChar, loading: loadingChar } = useQueryCharacter(
+    search,
     actualPage
   );
-  const { data: dataChar, loading: loadingChar } = useQueryCharacter(search);
 
-  const { data: dataLocations, loading: loadingLocations } = useQueryLocations(
+  const { data: dataLocation, loading: loadingLocation } = useQueryLocation(
+    search,
     actualPage
   );
 
   useEffect(() => {
-    if (actualFilter === "Characters" && !search && dataPage && !loadingPage) {
-      setLoading(loadingPage);
-      setData(dataPage);
-      return;
-    }
-
-    if (actualFilter === "Characters" && search && dataChar && !loadingChar) {
+    if (actualFilter === "Characters" && dataChar && !loadingChar) {
       setLoading(loadingChar);
-
       setData(dataChar);
-      return;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataPage, loadingPage, dataChar, loadingChar, search, actualFilter]);
+  }, [dataChar, loadingChar, actualFilter]);
 
   useEffect(() => {
-    if (
-      actualFilter === "Locations" &&
-      !search &&
-      dataLocations &&
-      !loadingLocations
-    ) {
-      setLoading(loadingLocations);
-      setData(dataLocations);
-      return;
+    if (actualFilter === "Locations" && dataLocation && !loadingLocation) {
+      setLoading(loadingLocation);
+      setData(dataLocation);
     }
-    if (
-      actualFilter === "Locations" &&
-      search &&
-      dataLocations &&
-      !loadingLocations
-    ) {
-      setLoading(loadingLocations);
-      setData(dataLocations);
-      return;
-    }
-  }, [dataLocations, loadingLocations, actualFilter, search]);
+  }, [actualFilter, dataLocation, loadingLocation]);
 
   return (
     <Fragment>

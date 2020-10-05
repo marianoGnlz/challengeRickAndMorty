@@ -40,8 +40,7 @@ function Navbar({ setSearch, setShowFilter }: Props) {
             type="submit"
             onClick={(e) => {
               e.preventDefault();
-              
-              console.log(value)
+
               setSearch(value);
             }}
           >

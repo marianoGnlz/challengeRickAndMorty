@@ -6,34 +6,10 @@ type Query = {
   loading: boolean;
 };
 
-export const useQueryCharacters = (actualPage: number): Query => {
-  const queryPage = gql`
-    query getCharacters($actualPage: Int) {
-      characters(page: $actualPage) {
-        info {
-          count
-          pages
-        }
-        results {
-          name
-          image
-          type
-          gender
-          species
-        }
-      }
-    }
-  `;
-  const { data, loading } = useQuery(queryPage, {
-    variables: { actualPage },
-  });
-  return { data, loading };
-};
-
-export const useQueryCharacter = (search: string): Query => {
+export const useQueryCharacter = (search: string, actualPage: number): Query => {
   const queryCharacter = gql`
-    query getCharacter($search: String) {
-      characters(filter: { name: $search }) {
+    query getCharacter($search: String, , $actualPage: Int) {
+      characters(filter: { name: $search }, page: $actualPage) {
         info {
           pages
         }
@@ -46,15 +22,15 @@ export const useQueryCharacter = (search: string): Query => {
   `;
 
   const { data, loading } = useQuery(queryCharacter, {
-    variables: { search },
+    variables: { search, actualPage },
   });
   return { data, loading };
 };
 
-export const useQueryLocations = (actualPage: number): Query => {
-  const queryLocations = gql`
-    query getLocations {
-      locations {
+export const useQueryLocation = (search: string, actualPage: number): Query => {
+  const queryLocation = gql`
+    query getLocation($search: String, , $actualPage: Int) {
+      locations(filter: { name: $search }, page: $actualPage) {
         info {
           pages
         }
@@ -64,12 +40,14 @@ export const useQueryLocations = (actualPage: number): Query => {
           dimension
           residents {
             name
+            image
           }
         }
       }
     }
   `;
-  const { data, loading } = useQuery(queryLocations);
+
+  const { data, loading } = useQuery(queryLocation, { variables: { search, actualPage } });
 
   return { data, loading };
 };

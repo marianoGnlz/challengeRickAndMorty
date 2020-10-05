@@ -1,4 +1,4 @@
-import React, { Fragment, ReactNode, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import CardCharacter from "../components/CharacterCard";
 
@@ -9,10 +9,10 @@ type Props = {
   image: string;
   type: string;
   gender: string;
-  species: string
+  species: string;
 };
 
-const ModalCustom = ({ name, image, type, gender, species }: Props) => {
+const ModalCharacter = ({ name, image, type, gender, species }: Props) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -26,7 +26,7 @@ const ModalCustom = ({ name, image, type, gender, species }: Props) => {
         handleShow={handleShow}
       />
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal size="lg" show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{name}</Modal.Title>
         </Modal.Header>
@@ -35,11 +35,20 @@ const ModalCustom = ({ name, image, type, gender, species }: Props) => {
             key={v4()}
             name={name}
             image={image}
-            handleShow={handleShow}
+            handleShow={() => {
+              return null;
+            }}
+            card={true}
           />
-          <p> {type} </p>
-          <p> {gender} </p>
-          <p> {species} </p>
+          <p>
+            <span>Type:</span> {type ? type : "unknown"}{" "}
+          </p>
+          <p>
+            <span>Gender:</span> {gender ? gender : "unknown"}{" "}
+          </p>
+          <p>
+            <span>Specie:</span> {species ? species : "unknown"}{" "}
+          </p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -50,4 +59,4 @@ const ModalCustom = ({ name, image, type, gender, species }: Props) => {
     </Fragment>
   );
 };
-export default ModalCustom;
+export default ModalCharacter;
